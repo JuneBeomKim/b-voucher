@@ -19,6 +19,15 @@ public class PolicyHandler{
     public void wheneverRentalCancelled_RentalCancel(@Payload RentalCancelled rentalCancelled){
 
         if(rentalCancelled.isMe()){
+
+            //voucher
+            //voucherCnt 개수 조정 (+1)
+            Voucher voucher = new Voucher();
+            voucher.setId(rentalCancelled.getVoucherId());
+            voucher.setUserId(rentalCancelled.getUserId());
+            voucher.setVoucherCnt(voucher.getVoucherCnt()+1);//1증가
+
+
             System.out.println("##### listener RentalCancel : " + rentalCancelled.toJson());
         }
     }

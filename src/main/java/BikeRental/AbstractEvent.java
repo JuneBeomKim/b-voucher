@@ -46,6 +46,8 @@ public class AbstractEvent {
             KafkaProcessor processor = VoucherApplication.applicationContext.getBean(KafkaProcessor.class);
             MessageChannel outputChannel = processor.outboundTopic();
 
+            System.out.println("### json : " + json);
+
             outputChannel.send(MessageBuilder
                     .withPayload(json)
                     .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)

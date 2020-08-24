@@ -25,6 +25,12 @@ public class VoucherUpdated extends AbstractEvent {
     }
 
     public void setVoucherCnt(Long voucherCnt) {
+        //호출됨
+        System.out.println("### [VoucherUpdated] setVoucherCnt(), voucherCnt =>" +voucherCnt);
+
+        //voucher 수량 업데이트 시행
+
+
         this.voucherCnt = voucherCnt;
     }
 }

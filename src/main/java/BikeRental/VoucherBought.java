@@ -25,6 +25,10 @@ public class VoucherBought extends AbstractEvent {
     }
 
     public void setVoucherCnt(Long voucherCnt) {
+        //voucherCnt 처리
+        // null인 경우 0,
+        // 그외에는 1증가
+        voucherCnt = (voucherCnt == null)  ? 0 : voucherCnt +1;
         this.voucherCnt = voucherCnt;
     }
 }
