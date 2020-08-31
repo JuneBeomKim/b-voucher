@@ -28,9 +28,15 @@ public class VoucherUpdated extends AbstractEvent {
         //호출됨
         System.out.println("### [VoucherUpdated] setVoucherCnt(), voucherCnt =>" +voucherCnt);
 
+        boolean bOK = true;
+        //NUll check
+        if(this.userId == null)
+            bOK = false;
+        if(this.id == null)
+            bOK = false;
+
         //voucher 수량 업데이트 시행
-
-
-        this.voucherCnt = voucherCnt;
+        if(bOK)
+            this.voucherCnt = voucherCnt;
     }
 }

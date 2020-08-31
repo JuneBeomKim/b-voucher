@@ -54,8 +54,8 @@ public class Voucher {
     }
 
     public void setVoucherCnt(Long voucherCnt) {
-        //voucher 개수 조정
 
+        //voucher 개수 조정
         this.voucherCnt = voucherCnt;
     }
 
