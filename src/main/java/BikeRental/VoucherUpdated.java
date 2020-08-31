@@ -36,7 +36,14 @@ public class VoucherUpdated extends AbstractEvent {
             bOK = false;
 
         //voucher 수량 업데이트 시행
-        if(bOK)
+        if(bOK){
             this.voucherCnt = voucherCnt;
+
+            //SAGA Pattern
+            //rental 의 값을 ㅊ
+
+        }
+
+
     }
 }

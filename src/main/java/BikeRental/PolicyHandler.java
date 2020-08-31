@@ -21,17 +21,29 @@ public class PolicyHandler{
         if(rentalCancelled.isMe()){
 
             //voucherCnt 개수 조정 (+1)
-            System.out.println("#####11=============");
+
+            //SAGA Pattern
+            //rental 쪽의 값 저장
+
+            //voucher에 rental cancel에 대한 처리
+            System.out.println("#####[rentalCancelled] ::SAGA:: voucher =============");
             Voucher voucher = new Voucher();
             voucher.setId(rentalCancelled.getVoucherId());
             voucher.setUserId(rentalCancelled.getUserId());
 
-            if(voucher.getVoucherCnt()==null){
+            boolean bOK = false;
+            if(rentalCancelled.getUserId() == null)
+                bOK = true;
+
+            if(rentalCancelled.getId() == null)
+                bOK = true;
+
+            //Voucher 에 대한 null 처리
+            if(voucher.getVoucherCnt()==null)
                 voucher.setVoucherCnt(0L);
-            }else {
+
+            if (bOK)
                 voucher.setVoucherCnt(voucher.getVoucherCnt() + 1);//1증가
-            }
-            System.out.println("#####22=============");
 
             System.out.println("##### listener RentalCancel : " + rentalCancelled.toJson());
         }

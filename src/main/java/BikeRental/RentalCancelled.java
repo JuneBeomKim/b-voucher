@@ -33,6 +33,8 @@ public class RentalCancelled extends AbstractEvent {
     }
 
     public void setBikeId(Long bikeId) {
+        //Rental Cancelled
+
         this.bikeId = bikeId;
     }
 }
