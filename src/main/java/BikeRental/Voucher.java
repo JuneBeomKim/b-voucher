@@ -25,6 +25,8 @@ public class Voucher {
 
     @PostUpdate
     public void onPostUpdate(){
+        System.out.println("### onPostUpdate() ###");
+
         VoucherUpdated voucherUpdated = new VoucherUpdated();
         BeanUtils.copyProperties(this, voucherUpdated);
         voucherUpdated.publishAfterCommit();
