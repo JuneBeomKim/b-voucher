@@ -36,5 +36,4 @@ public class PolicyHandler{
             System.out.println("##### listener RentalCancel : " + rentalCancelled.toJson());
         }
     }
-
 }
