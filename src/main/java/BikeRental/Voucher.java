@@ -16,27 +16,30 @@ public class Voucher {
 
     @PostPersist
     public void onPostPersist(){
+
+        System.out.println("######onPostPersist ######" );
         VoucherBought voucherBought = new VoucherBought();
         BeanUtils.copyProperties(this, voucherBought);
         voucherBought.publishAfterCommit();
 
 
-
-        //
-
-
-
-
     }
 
-    @PostUpdate
-    public void onPostUpdate(){
-        System.out.println("### onPostUpdate() ###");
+    @PreUpdate
+    public void onPreUpdate(){
+
+        System.out.println("this : " + this);
+        System.out.println("id : " + this.getId());
+        System.out.println("VoucherCNT : " + this.getVoucherCnt());
+        // System.out.println(this.getVoucherCnt()-1L);
 
         VoucherUpdated voucherUpdated = new VoucherUpdated();
+        // voucherUpdated.setVoucherCnt(this.getVoucherCnt()-1L);
+      
         BeanUtils.copyProperties(this, voucherUpdated);
         voucherUpdated.publishAfterCommit();
     }
+
 
     public Long getId() {
         return id;
@@ -57,8 +60,8 @@ public class Voucher {
     }
 
     public void setVoucherCnt(Long voucherCnt) {
-
         //voucher 개수 조정
+
         this.voucherCnt = voucherCnt;
     }
 
