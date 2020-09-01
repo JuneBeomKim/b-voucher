@@ -44,10 +44,11 @@ public class PolicyHandler{
             if(voucher.getVoucherCnt()==null)
                 voucher.setVoucherCnt(0L);
 
-            if (bOK)
+            if (bOK){
                 voucher.setVoucherCnt(voucher.getVoucherCnt() + 1);//1증가
-
-            voucherRepository.save(voucher);
+                voucherRepository.save(voucher);
+                System.out.println("##### voucherRepository.save() ### : "+voucher);
+            }
 
             System.out.println("##### listener RentalCancel : " + rentalCancelled.toJson());
         }

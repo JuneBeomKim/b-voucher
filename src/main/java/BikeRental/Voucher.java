@@ -19,6 +19,14 @@ public class Voucher {
         VoucherBought voucherBought = new VoucherBought();
         BeanUtils.copyProperties(this, voucherBought);
         voucherBought.publishAfterCommit();
+
+
+
+        //
+
+
+
+
     }
 
     @PostUpdate
