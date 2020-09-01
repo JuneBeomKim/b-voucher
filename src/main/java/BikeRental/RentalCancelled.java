@@ -6,6 +6,7 @@ public class RentalCancelled extends AbstractEvent {
     private Long userId;
     private Long voucherId;
     private Long bikeId;
+    private Long voucherCnt;
 
     public Long getId() {
         return id;
@@ -33,8 +34,14 @@ public class RentalCancelled extends AbstractEvent {
     }
 
     public void setBikeId(Long bikeId) {
-        //Rental Cancelled
-
         this.bikeId = bikeId;
+    }
+
+    public Long getVoucherCnt() {
+        return voucherCnt;
+    }
+
+    public void setVoucherCnt(Long voucherCnt) {
+        this.voucherCnt = voucherCnt;
     }
 }
