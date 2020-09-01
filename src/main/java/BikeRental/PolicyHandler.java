@@ -14,6 +14,8 @@ public class PolicyHandler{
     public void onStringEventListener(@Payload String eventString){
         System.out.println("### eventString : "+eventString);
     }
+    @Autowired
+    VoucherRepository voucherRepository;
 
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverRentalCancelled_RentalCancel(@Payload RentalCancelled rentalCancelled){
@@ -44,6 +46,8 @@ public class PolicyHandler{
 
             if (bOK)
                 voucher.setVoucherCnt(voucher.getVoucherCnt() + 1);//1증가
+
+            voucherRepository.save(voucher);
 
             System.out.println("##### listener RentalCancel : " + rentalCancelled.toJson());
         }

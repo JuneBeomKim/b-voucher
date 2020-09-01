@@ -19,8 +19,6 @@ public class Voucher {
         VoucherBought voucherBought = new VoucherBought();
         BeanUtils.copyProperties(this, voucherBought);
         voucherBought.publishAfterCommit();
-
-
     }
 
     @PostUpdate
@@ -30,10 +28,7 @@ public class Voucher {
         VoucherUpdated voucherUpdated = new VoucherUpdated();
         BeanUtils.copyProperties(this, voucherUpdated);
         voucherUpdated.publishAfterCommit();
-
-
     }
-
 
     public Long getId() {
         return id;
