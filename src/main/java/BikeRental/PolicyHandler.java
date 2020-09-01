@@ -1,6 +1,9 @@
 package BikeRental;
 
 import BikeRental.config.kafka.KafkaProcessor;
+
+import java.util.Optional;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +15,9 @@ import org.springframework.stereotype.Service;
 public class PolicyHandler{
     @StreamListener(KafkaProcessor.INPUT)
     public void onStringEventListener(@Payload String eventString){
-        System.out.println("### eventString : "+eventString);
+
     }
+
     @Autowired
     VoucherRepository voucherRepository;
 
@@ -22,35 +26,28 @@ public class PolicyHandler{
 
         if(rentalCancelled.isMe()){
 
+
+            Optional<Voucher> orderOptional = voucherRepository.findById(rentalCancelled.getVoucherId()); 
+            Voucher voucher = orderOptional.get(); 
+
+            //voucher
             //voucherCnt 개수 조정 (+1)
+            //Voucher voucher = new Voucher();
 
-            //SAGA Pattern
-            //rental 쪽의 값 저장
+            System.out.println("wheneverRentalCancelled_RentalCancel");
+            System.out.println(voucher.getVoucherCnt());
+            // System.out.println(rentalCancelled.getVoucherCnt());
+            
+            System.out.println("##### listener RentalCancel : " + rentalCancelled.toJson());
 
-            //voucher에 rental cancel에 대한 처리
-            System.out.println("#####[rentalCancelled] ::SAGA:: voucher =============");
-            Voucher voucher = new Voucher();
             voucher.setId(rentalCancelled.getVoucherId());
             voucher.setUserId(rentalCancelled.getUserId());
+            // voucher.setVoucherCnt(rentalCancelled.getVoucherCnt());
+            voucher.setVoucherCnt(voucher.getVoucherCnt()+1L);
+            // System.out.println(voucher.getVoucherCnt()+1L);
 
-            boolean bOK = false;
-            if(rentalCancelled.getUserId() == null)
-                bOK = true;
-
-            if(rentalCancelled.getId() == null)
-                bOK = true;
-
-            //Voucher 에 대한 null 처리
-            if(voucher.getVoucherCnt()==null)
-                voucher.setVoucherCnt(0L);
-
-            if (bOK){
-                voucher.setVoucherCnt(voucher.getVoucherCnt() + 1);//1증가
-                voucherRepository.save(voucher);
-                System.out.println("##### voucherRepository.save() ### : "+voucher);
-            }
-
-            System.out.println("##### listener RentalCancel : " + rentalCancelled.toJson());
+            voucherRepository.save(voucher);
         }
     }
+
 }
